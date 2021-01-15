@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 /// Function signature for callbacks executed when push message is available;
 typedef Future<void> MessageHandler(Map<String, dynamic> message);
 
-/// Interface for either APNS or Firebase connector, implementing common features.
+/// Interface for APNS connector, implementing common features.
 abstract class PushConnector {
   /// User declined to allow for push messages.
   /// initially nil
