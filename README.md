@@ -1,6 +1,6 @@
 # apns
 
-`firebase_messaging`-free plugin to implement APNS push notifications on iOS while using `firebase_messaging` for Android notifications.
+[flutter_apns](https://github.com/mwaylabs/flutter-apns) fork without any `firebase_messaging` dependencies, bringing you APNS push notifications on iOS while allowing you to use (or not) any version of `firebase_messaging`.
 
 ## Why this plugin was made?
 
