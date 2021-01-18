@@ -4,7 +4,7 @@
 
 ## Why this plugin was made?
 
-Original `flutter-apns` extends and use `firebase_messaging` but is no more compatible with `firebase_messaging`. This version doesn't extends it so you're free to use it on iOS without `firebase_messaging` or while having your own `firebase_messaging` setup.
+Original `flutter-apns` extends and use `firebase_messaging` but is no more compatible with its 8+ version. This plugin doesn't extends it so you're free to use it on iOS without `firebase_messaging` or while having your own `firebase_messaging` setup.
 
 ## Usage
 1. On iOS, make sure you have correctly configured your app to support push notifications, and that you have generated certificate/token for sending pushes.
