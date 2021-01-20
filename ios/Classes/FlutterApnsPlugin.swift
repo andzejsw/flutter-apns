@@ -143,8 +143,8 @@ func getFlutterError(_ error: Error) -> FlutterError {
 
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
         launchNotification = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any]
-        NSLog("\nlaunchNotification %@", launchNotification ?? "nil")
-        
+        NSLog("\nlaunchNotification: %@", launchNotification ?? "nil")
+
         return true
     }
 
@@ -160,11 +160,6 @@ func getFlutterError(_ error: Error) -> FlutterError {
 
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         channel.invokeMethod("onToken", arguments: deviceToken.hexString)
-        
-        if launchNotification != nil {
-            channel.invokeMethod("onLaunch", arguments: launchNotification)
-            self.launchNotification = nil
-        }
     }
 
 
@@ -215,6 +210,7 @@ func getFlutterError(_ error: Error) -> FlutterError {
 
     func onResume(userInfo: [AnyHashable: Any]) {
         if let launchNotification = launchNotification {
+            NSLog("onResume launchNotification: %@", self.launchNotification ?? "nil")
             channel.invokeMethod("onLaunch", arguments: userInfo)
             self.launchNotification = nil
             return
