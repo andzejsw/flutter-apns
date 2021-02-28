@@ -1,6 +1,8 @@
 .DS_Store
 .dart_tool/
 idea/
+.idea/
+example/ios/Flutter/.last_build_id
 
 .packages
 .pub/

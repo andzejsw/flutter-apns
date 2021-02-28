@@ -1,15 +1,14 @@
 # apns
 
-Plugin to implement APNS push notifications on iOS and Firebase on Android. 
+[flutter_apns](https://github.com/mwaylabs/flutter-apns) fork without any `firebase_messaging` dependencies, bringing you APNS push notifications on iOS while allowing you to use (or not) any version of `firebase_messaging`.
 
 ## Why this plugin was made?
 
-Currently, the only available push notification plugin is `firebase_messaging`. This means that, even on iOS, you will need to setup firebase and communicate with Google to send push notification. This plugin solves the problem by providing native APNS implementation while leaving configured Firebase for Android.
+Original `flutter-apns` extends and use `firebase_messaging` but is no more compatible with its 8+ version. This plugin doesn't extends it so you're free to use it on iOS without `firebase_messaging` or while having your own `firebase_messaging` setup.
 
 ## Usage
-1. Configure firebase on Android according to instructions: https://pub.dartlang.org/packages/firebase_messaging.
-2. On iOS, make sure you have correctly configured your app to support push notifications, and that you have generated certificate/token for sending pushes.
-3. Add the following lines to the `didFinishLaunchingWithOptions` method in the AppDelegate.m/AppDelegate.swift file of your iOS project
+1. On iOS, make sure you have correctly configured your app to support push notifications, and that you have generated certificate/token for sending pushes.
+2. Add the following lines to the `didFinishLaunchingWithOptions` method in the AppDelegate.m/AppDelegate.swift file of your iOS project
 
 Objective-C:
 ```objc
@@ -25,8 +24,8 @@ if #available(iOS 10.0, *) {
 }
 ```
 
-4. Add `flutter_apns` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-5. Using `createPushConnector()` method, configure push service according to your needs. `PushConnector` closely resembles `FirebaseMessaging`, so Firebase samples may be useful during implementation.
+3. Add `flutter_apns` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+4. Using `createPushConnector()` method, configure push service according to your needs. `PushConnector` closely resembles `FirebaseMessaging`, so Firebase samples may be useful during implementation. You should create the connector as soon as possible to get the onLaunch callback working on closed app launch.
 ```dart
 import 'package:flutter_apns/apns.dart';
 
@@ -38,7 +37,7 @@ connector.configure(
 );
 connector.requestNotificationPermissions()
 ```
-6. Build on device and test your solution using Firebase Console and NWPusher app.
+5. Build on device and test your solution using Firebase Console and NWPusher app.
 
 ## Additional APNS features:
 ### Displaying notification while in foreground
@@ -96,16 +95,6 @@ Future<dynamic> onPush(String name, Map<String, dynamic> payload) {
 Note: if user clickes your notification while app is in the background, push will be delivered through onResume without actually waking up the app. Make sure your handling of given action is quick and error free, as execution time in for apps running in the background is very limited.
 
 Check the example project for fully working code.
-
-## Enabling FirebaseCore
-If you want to use firebase, but not firebase messaging, add this configuration entry in your Info.plist:
-
-```
-<key>flutter_apns.disable_firebase_core</key>
-<false/>
-```
-
-
 
 ## Troubleshooting
 
