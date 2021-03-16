@@ -11,7 +11,7 @@ abstract class PushConnector {
 
   /// Value of registered token
   /// initially nil
-  ValueNotifier<String> get token;
+  ValueNotifier<String?>? get token;
 
   /// Either GCM or APNS
   String get providerType;
